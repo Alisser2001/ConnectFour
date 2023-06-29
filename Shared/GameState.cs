@@ -7,10 +7,6 @@ public class GameState
 	{
 		CalculateWinningPlaces();
 	}
-
-	/// <summary>
-	/// Indicate whether a player has won, the game is a tie, or game in ongoing
-	/// </summary>
 	public enum WinState
 	{
 		No_Winner = 0,
@@ -19,14 +15,8 @@ public class GameState
 		Tie = 3
 	}
 
-	/// <summary>
-	/// The player whose turn it is.  By default, player 1 starts first
-	/// </summary>
 	public int PlayerTurn => TheBoard.Count(x => x != 0) % 2 + 1;
 
-	/// <summary>
-	/// Number of turns completed and pieces played so far in the game
-	/// </summary>
 	public int CurrentTurn { get { return TheBoard.Count(x => x != 0); } }
 
 	public static readonly List<int[]> WinningPlaces = new();
@@ -34,7 +24,6 @@ public class GameState
 	public static void CalculateWinningPlaces() 
 	{
 
-		// Horizontal rows
 		for (byte row=0;row<6;row++){
 
 			byte rowCol1 = (byte)(row * 7);
@@ -53,7 +42,6 @@ public class GameState
 
 		}
 
-		// Vertical Columns
 		for (byte col = 0; col < 7; col++)
 		{
 
@@ -73,11 +61,9 @@ public class GameState
 
 		}
 
-		// forward slash diagonal "/"
 		for (byte col = 0; col < 4; col++)
 		{
 
-			// starting column must be 0-3
 			byte colRow1 = (byte)(21 + col);
 			byte colRowEnd = (byte)(35 + col);
 			byte checkPos = colRow1;
@@ -94,7 +80,6 @@ public class GameState
 
 		}
 
-		// back slash diaganol "\"
 		for (byte col = 0; col < 4; col++)
 		{
 
@@ -118,14 +103,9 @@ public class GameState
 
 	}
 
-	/// <summary>
-	/// Check the state of the board for a winning scenario
-	/// </summary>
-	/// <returns>0 - no winner, 1 - player 1 wins, 2 - player 2 wins, 3 - draw</returns>
 	public WinState CheckForWin()
 	{
 
-		// Exit immediately if less than 7 pieces are played
 		if (TheBoard.Count(x => x != 0) < 7) return WinState.No_Winner;
 
 		foreach (var scenario in WinningPlaces)
@@ -148,21 +128,13 @@ public class GameState
 
 	}
 
-	/// <summary>
-	/// Takes the current turn and places a piece in the 0-indexed column requested
-	/// </summary>
-	/// <param name="column">0-indexed column to place the piece into</param>
-	/// <returns>The final array index where the piece resides</returns>
 	public byte PlayPiece(int column)
 	{
 
-		// Check for a current win
 		if (CheckForWin() != 0) throw new ArgumentException("Game is over");
 
-		// Check the column
 		if (TheBoard[column] != 0) throw new ArgumentException("Column is full");
 
-		// Drop the piece in
 		var landingSpot = column;
 		for (var i=column;i<42;i+=7)
 		{

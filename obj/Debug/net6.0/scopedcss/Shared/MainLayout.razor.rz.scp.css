@@ -12,5 +12,19 @@ main[b-6iaftcaddt] {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-top: 50px;
 }
+
+main>img[b-6iaftcaddt]{
+    transform: scale(0.5);
+    margin: 0;
+    position: absolute;
+    top: -50px;
+    left: -200px;
+}
+
+.content[b-6iaftcaddt]{
+    transform: scale(1.3);
+}
+
 

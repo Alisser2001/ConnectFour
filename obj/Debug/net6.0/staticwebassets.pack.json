@@ -5,6 +5,10 @@
       "PackagePath": "staticwebassets\\ConnectFour.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\Alisser\\Documents\\Proyectos\\ConnectFour\\wwwroot\\Connect4Logo.png",
+      "PackagePath": "staticwebassets\\Connect4Logo.png"
+    },
+    {
       "Id": "C:\\Users\\Alisser\\Documents\\Proyectos\\ConnectFour\\wwwroot\\css\\bootstrap\\bootstrap.min.css",
       "PackagePath": "staticwebassets\\css\\bootstrap\\bootstrap.min.css"
     },
@@ -51,10 +55,6 @@
     {
       "Id": "C:\\Users\\Alisser\\Documents\\Proyectos\\ConnectFour\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
-    },
-    {
-      "Id": "C:\\Users\\Alisser\\Documents\\Proyectos\\ConnectFour\\wwwroot\\favicon.ico",
-      "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
       "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.ConnectFour.Microsoft.AspNetCore.StaticWebAssets.props",
