@@ -1,0 +1,28 @@
+.home[b-m9yl5wzv01]{
+    width: 100vw;
+    height: 80vh;
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.home>img[b-m9yl5wzv01]{
+    width: 50%;
+    margin-bottom: 10vh;
+}
+
+.options[b-m9yl5wzv01]{
+    width: 50%;
+    height: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 5vh;
+}
+
+.options>a[b-m9yl5wzv01]{
+    margin: 0 0 5vh 0;
+}

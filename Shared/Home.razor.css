@@ -1,0 +1,28 @@
+.home{
+    width: 100vw;
+    height: 80vh;
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.home>img{
+    width: 50%;
+    margin-bottom: 10vh;
+}
+
+.options{
+    width: 50%;
+    height: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 5vh;
+}
+
+.options>a{
+    margin: 0 0 5vh 0;
+}

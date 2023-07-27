@@ -30,3 +30,4 @@ C:\Users\Alisser\Documents\Proyectos\ConnectFour\obj\Debug\net6.0\ConnectFour.pd
 C:\Users\Alisser\Documents\Proyectos\ConnectFour\obj\Debug\net6.0\ConnectFour.genruntimeconfig.cache
 C:\Users\Alisser\Documents\Proyectos\ConnectFour\obj\Debug\net6.0\ref\ConnectFour.dll
 C:\Users\Alisser\Documents\Proyectos\ConnectFour\obj\Debug\net6.0\scopedcss\Shared\Board.razor.rz.scp.css
+C:\Users\Alisser\Documents\Proyectos\ConnectFour\obj\Debug\net6.0\scopedcss\Shared\Home.razor.rz.scp.css

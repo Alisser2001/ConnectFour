@@ -5,6 +5,29 @@
     height: 100vh;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
+}
+
+.top-bar{
+    width: 100vw;
+    height: 15vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center; 
+}
+
+.logo{
+    margin: 0;
+    width: 100vw;
+    height: 15vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.logo>img{
+    display: flex;
 }
 
 main {
@@ -12,19 +35,8 @@ main {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 50px;
-}
-
-main>img{
-    transform: scale(0.5);
-    margin: 0;
-    position: absolute;
-    top: -50px;
-    left: -200px;
-}
-
-.content{
-    transform: scale(1.3);
+    width: 100vw;
+    height: 85vh;
 }
 
 

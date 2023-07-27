@@ -12,36 +12,38 @@
   </style>
 </HeadContent>
 
-<article class="alert">
-  <span class="alert-info">@CurrentTurn</span>
-  <span>@WinnerMessage</span> 
-  <button style="@ResetStyle" @onclick="ResetGame">Reset the game</button>
-  <span class="alert-danger">@ErrorMessage</span>
-</article>
+<div class="container">
+  <article class="alert">
+    <span class="alert-info">@CurrentTurn</span>
+    <span>@WinnerMessage</span> 
+    <button style="@ResetStyle" @onclick="ResetGame">Reset the game</button>
+    <span class="alert-danger">@ErrorMessage</span>
+  </article>
 
-<nav>
-  <span style="@OnFocusCol[0]" title="Click to play a piece" @onclick="() => PlayPiece(0)" @onmouseover="() => FocusCol(0)"></span>
-  <span style="@OnFocusCol[1]" title="Click to play a piece" @onclick="() => PlayPiece(1)" @onmouseover="() => FocusCol(1)"></span>
-  <span style="@OnFocusCol[2]" title="Click to play a piece" @onclick="() => PlayPiece(2)" @onmouseover="() => FocusCol(2)"></span>
-  <span style="@OnFocusCol[3]" title="Click to play a piece" @onclick="() => PlayPiece(3)" @onmouseover="() => FocusCol(3)"></span>
-  <span style="@OnFocusCol[4]" title="Click to play a piece" @onclick="() => PlayPiece(4)" @onmouseover="() => FocusCol(4)"></span>
-  <span style="@OnFocusCol[5]" title="Click to play a piece" @onclick="() => PlayPiece(5)" @onmouseover="() => FocusCol(5)"></span>
-  <span style="@OnFocusCol[6]" title="Click to play a piece" @onclick="() => PlayPiece(6)" @onmouseover="() => FocusCol(6)"></span>
-</nav>
+  <nav class="pieces">
+    <span style="@OnFocusCol[0]" title="Click to play a piece" @onclick="() => PlayPiece(0)" @onmouseover="() => FocusCol(0)"></span>
+    <span style="@OnFocusCol[1]" title="Click to play a piece" @onclick="() => PlayPiece(1)" @onmouseover="() => FocusCol(1)"></span>
+    <span style="@OnFocusCol[2]" title="Click to play a piece" @onclick="() => PlayPiece(2)" @onmouseover="() => FocusCol(2)"></span>
+    <span style="@OnFocusCol[3]" title="Click to play a piece" @onclick="() => PlayPiece(3)" @onmouseover="() => FocusCol(3)"></span>
+    <span style="@OnFocusCol[4]" title="Click to play a piece" @onclick="() => PlayPiece(4)" @onmouseover="() => FocusCol(4)"></span>
+    <span style="@OnFocusCol[5]" title="Click to play a piece" @onclick="() => PlayPiece(5)" @onmouseover="() => FocusCol(5)"></span>
+    <span style="@OnFocusCol[6]" title="Click to play a piece" @onclick="() => PlayPiece(6)" @onmouseover="() => FocusCol(6)"></span>
+  </nav>
 
-<div>
-  <div class="board">
+  <div class="contBoard">
+    <div class="board">
+      @for (var i = 0; i < 42; i++)
+      {
+        <span class="space">
+          <span class="backfill"></span>
+        </span>
+      }
+    </div>
     @for (var i = 0; i < 42; i++)
     {
-      <span class="container">
-        <span></span>
-      </span>
+      <span class="@Pieces[i]"></span>
     }
   </div>
-  @for (var i = 0; i < 42; i++)
-  {
-    <span class="@Pieces[i]"></span>
-  }
 </div>
 
 @code {
