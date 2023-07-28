@@ -1,13 +1,28 @@
-
+@inject ConnectFour.Shared.GameState State
 
 <div class="home">
     <img src="play.png" />
     <article class="options">
-        <a href="play">
+        <a href="play" @onclick="() => Play(1)">
             <img src="player1.png">
         </a>
-        <a href="play">
+        <a href="play" @onclick="() => Play(2)">
             <img src="player2.png">
         </a>
     </article>
 </div>
+
+@code{
+    private void Play(byte players){
+        try{
+            if(players == 1){
+                State.One_Player();
+            }
+            if(players == 2){
+                State.Two_Player();
+            }
+        }catch(ArgumentException ex){
+            Console.WriteLine(ex);
+        }
+    }
+}

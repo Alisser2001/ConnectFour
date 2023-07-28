@@ -19,11 +19,11 @@
 
 .logo[b-6iaftcaddt]{
     margin: 0;
-    width: 100vw;
+    width: 20vw;
     height: 15vh;
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
+    cursor: pointer;
 }
 
 .logo>img[b-6iaftcaddt]{

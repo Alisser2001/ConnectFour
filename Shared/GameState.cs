@@ -21,11 +21,23 @@ public class GameState
 
 	public static readonly List<int[]> WinningPlaces = new();
 
+	public bool TwoPlayers = false;
+
+	public void Two_Player()
+	{
+		TwoPlayers = true;
+	}
+
+	public void One_Player()
+	{
+		TwoPlayers = false;
+	}
+
+
+	//Cada que cambia el estado del juego, recalcula por columnas, filas y diagonales 
 	public static void CalculateWinningPlaces() 
 	{
-
 		for (byte row=0;row<6;row++){
-
 			byte rowCol1 = (byte)(row * 7);
 			byte rowColEnd = (byte)((row + 1) * 7 - 1);
 			byte checkCol = rowCol1;
@@ -39,12 +51,9 @@ public class GameState
 					});
 				checkCol++;
 			}
-
 		}
-
 		for (byte col = 0; col < 7; col++)
 		{
-
 			byte colRow1 = col;
 			byte colRowEnd = (byte)(35+col);
 			byte checkRow = colRow1;
@@ -58,12 +67,9 @@ public class GameState
 					});
 				checkRow+=7;
 			}
-
 		}
-
 		for (byte col = 0; col < 4; col++)
 		{
-
 			byte colRow1 = (byte)(21 + col);
 			byte colRowEnd = (byte)(35 + col);
 			byte checkPos = colRow1;
@@ -77,13 +83,9 @@ public class GameState
 					});
 				checkPos += 7;
 			}
-
 		}
-
 		for (byte col = 0; col < 4; col++)
 		{
-
-			// starting column must be 0-3
 			byte colRow1 = (byte)(0 + col);
 			byte colRowEnd = (byte)(14 + col);
 			byte checkPos = colRow1;
@@ -97,68 +99,69 @@ public class GameState
 					});
 				checkPos += 7;
 			}
-
 		}
-
-
 	}
+
 
 	public WinState CheckForWin()
 	{
-
 		if (TheBoard.Count(x => x != 0) < 7) return WinState.No_Winner;
-
 		foreach (var scenario in WinningPlaces)
 		{
-
 			if (TheBoard[scenario[0]] == 0) continue;
-
 			if (TheBoard[scenario[0]] ==
 				TheBoard[scenario[1]] &&
 				TheBoard[scenario[1]] ==
 				TheBoard[scenario[2]] &&
 				TheBoard[scenario[2]] ==
 				TheBoard[scenario[3]]) return (WinState)TheBoard[scenario[0]];
-
 		}
-
 		if (TheBoard.Count(x => x != 0) == 42) return WinState.Tie;
-
 		return WinState.No_Winner;
-
 	}
+
 
 	public byte PlayPiece(int column)
 	{
-
 		if (CheckForWin() != 0) throw new ArgumentException("Game is over");
-
 		if (TheBoard[column] != 0) throw new ArgumentException("Column is full");
-
 		var landingSpot = column;
 		for (var i=column;i<42;i+=7)
 		{
 			if (TheBoard[landingSpot + 7] != 0) break;
 			landingSpot = i;
 		}
-
 		TheBoard[landingSpot] = PlayerTurn;
-
 		return ConvertLandingSpotToRow(landingSpot);
-
 	}
 
+	public byte PlayAgainstMachine()
+    {
+        if (CheckForWin() != WinState.No_Winner)
+            throw new ArgumentException("Game is over");
+        if (TwoPlayers || PlayerTurn == 1)
+            throw new ArgumentException("It's not the machine's turn");
+        Random random = new Random();
+        int column;
+        do
+        {
+            column = random.Next(0, 7);
+        } while (TheBoard[column] != 0);
+        return (byte)column;
+    }
+
+
 	public List<int> TheBoard { get; private set; } = new List<int>(new int[42]);
+
 
 	public void ResetBoard() {
 		TheBoard = new List<int>(new int[42]);
 	}
 
+
 	private byte ConvertLandingSpotToRow(int landingSpot)
 	{
-
 		return (byte)(Math.Floor(landingSpot / (decimal)7) + 1);
-
 	}
 
 }
