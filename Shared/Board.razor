@@ -67,29 +67,32 @@
 
   private async void PlayPiece(byte col)
   {
-    ErrorMessage = string.Empty;
-    try
+    if (State.TwoPlayers || (!State.TwoPlayers && State.PlayerTurn == 1))
     {
-      CurrentPlayerColor = State.PlayerTurn == 1 ? Player1Color : Player2Color;
-      var landingRow = State.PlayPiece(col);
-      var cssClass = $"player{State.PlayerTurn} col{col} drop{landingRow}";
-      Pieces[State.CurrentTurn - 1] = cssClass;
-    }
-    catch (ArgumentException ex)
-    {
-      ErrorMessage = ex.Message;
-    }
-    WinnerMessage = State.CheckForWin() switch
-    {
-      GameState.WinState.Player1_Wins => "Player 1 Wins!",
-      GameState.WinState.Player2_Wins => "Player 2 Wins!",
-      GameState.WinState.Tie => "It's a tie!",
-      _ => ""
-    };
-    if (WinnerMessage == string.Empty && !State.TwoPlayers && State.PlayerTurn == 2)
-    {
-      await Task.Delay(1000);
-      PlayAgainstMachine();
+      ErrorMessage = string.Empty;
+      try
+      {
+        CurrentPlayerColor = State.PlayerTurn == 1 ? Player1Color : Player2Color;
+        var landingRow = State.PlayPiece(col);
+        var cssClass = $"player{State.PlayerTurn} col{col} drop{landingRow}";
+        Pieces[State.CurrentTurn - 1] = cssClass;
+      }
+      catch (ArgumentException ex)
+      {
+        ErrorMessage = ex.Message;
+      }
+      WinnerMessage = State.CheckForWin() switch
+      {
+        GameState.WinState.Player1_Wins => "Player 1 Wins!",
+        GameState.WinState.Player2_Wins => "Player 2 Wins!",
+        GameState.WinState.Tie => "It's a tie!",
+        _ => ""
+      };
+      if (WinnerMessage == string.Empty && !State.TwoPlayers && State.PlayerTurn == 2)
+      {
+        await Task.Delay(500);
+        PlayAgainstMachine();
+      }
     }
   }
 
@@ -100,8 +103,8 @@
     try
     {
       CurrentPlayerColor = State.PlayerTurn == 1 ? Player1Color : Player2Color;
-      byte col = State.PlayAgainstMachine();
-      var landingRow = State.PlayPiece(col);
+      int col = State.RandomColumn();
+      var landingRow = State.PlayAgainstMachine(col);
       var cssClass = $"player{State.PlayerTurn} col{col} drop{landingRow}";
       Pieces[State.CurrentTurn - 1] = cssClass;
     }
@@ -133,13 +136,6 @@
     {
       ErrorMessage = ex.Message;
     }
-    WinnerMessage = State.CheckForWin() switch
-    {
-      GameState.WinState.Player1_Wins => "Player 1 Wins!",
-      GameState.WinState.Player2_Wins => "Player 2 Wins!",
-      GameState.WinState.Tie => "It's a tie!",
-      _ => ""
-    };
   }
 
   void ResetGame()

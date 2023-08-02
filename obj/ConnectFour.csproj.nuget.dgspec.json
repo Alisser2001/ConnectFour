@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Alisser\\Documents\\Proyectos\\ConnectFour\\ConnectFour.csproj": {}
+    "c:\\Users\\Alisser\\Documents\\Proyectos\\ConnectFour\\ConnectFour.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Alisser\\Documents\\Proyectos\\ConnectFour\\ConnectFour.csproj": {
+    "c:\\Users\\Alisser\\Documents\\Proyectos\\ConnectFour\\ConnectFour.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Alisser\\Documents\\Proyectos\\ConnectFour\\ConnectFour.csproj",
+        "projectUniqueName": "c:\\Users\\Alisser\\Documents\\Proyectos\\ConnectFour\\ConnectFour.csproj",
         "projectName": "ConnectFour",
-        "projectPath": "C:\\Users\\Alisser\\Documents\\Proyectos\\ConnectFour\\ConnectFour.csproj",
+        "projectPath": "c:\\Users\\Alisser\\Documents\\Proyectos\\ConnectFour\\ConnectFour.csproj",
         "packagesPath": "C:\\Users\\Alisser\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Alisser\\Documents\\Proyectos\\ConnectFour\\obj\\",
+        "outputPath": "c:\\Users\\Alisser\\Documents\\Proyectos\\ConnectFour\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Alisser\\AppData\\Roaming\\NuGet\\NuGet.Config"
