@@ -146,33 +146,35 @@ public class GameState
 	public int RandomColumn()
 	{
 		int consecutiveVerticalPieces;
-		//(int, string) consecutiveHorizontalPieces;
+		(int, int, string) consecutiveHorizontalPieces;
 		//(int, string) consecutiveDiagonalPieces;
+		//Arreglar error: EN algun punto cuando pongo dos fichas juntas en las dos ultimas casillas, el juego se tilda
+		int column;
 		Random random = new();
-		/*for (int col = 0; col < 7; col++)
+		for (int col = 0; col < 7; col++)
 		{
 			consecutiveHorizontalPieces = CountConsecutiveHorizontalPieces(col, 1);
-			if (consecutiveHorizontalPieces.Item1 >= 2 && consecutiveHorizontalPieces.Item2 == "left" && col > 0)
+			if (consecutiveHorizontalPieces.Item1 >= 2 && consecutiveHorizontalPieces.Item3 == "left" && consecutiveHorizontalPieces.Item2 > 0)
 			{
-				return col - 1;
+				return consecutiveHorizontalPieces.Item2 - 1;
 			}
-			if (consecutiveHorizontalPieces.Item1 >= 2 && consecutiveHorizontalPieces.Item2 == "right" && col < 6 && (col + consecutiveHorizontalPieces.Item1) <= 6)
+			if (consecutiveHorizontalPieces.Item1 >= 2 && consecutiveHorizontalPieces.Item3 == "right" && col < 6 && (consecutiveHorizontalPieces.Item2 + consecutiveHorizontalPieces.Item1) <= 6)
 			{
-				return col + consecutiveHorizontalPieces.Item1;
+				return consecutiveHorizontalPieces.Item2 + consecutiveHorizontalPieces.Item1;
 			}
 		}
 		for (int col = 0; col < 7; col++)
 		{
 			consecutiveHorizontalPieces = CountConsecutiveHorizontalPieces(col, 2);
-			if (consecutiveHorizontalPieces.Item1 >= 2 && consecutiveHorizontalPieces.Item2 == "left" && col > 0)
+			if (consecutiveHorizontalPieces.Item1 >= 2 && consecutiveHorizontalPieces.Item3 == "left" && consecutiveHorizontalPieces.Item2 > 0)
 			{
-				return col - consecutiveHorizontalPieces.Item1;
+				return consecutiveHorizontalPieces.Item2 - 1;
 			}
-			if (consecutiveHorizontalPieces.Item1 >= 2 && consecutiveHorizontalPieces.Item2 == "right" && col < 4 && (col + consecutiveHorizontalPieces.Item1) <= 6)
+			if (consecutiveHorizontalPieces.Item1 >= 2 && consecutiveHorizontalPieces.Item3 == "right" && col < 6 && (consecutiveHorizontalPieces.Item2 + consecutiveHorizontalPieces.Item1) <= 6)
 			{
-				return col + consecutiveHorizontalPieces.Item1;
+				return consecutiveHorizontalPieces.Item2 + consecutiveHorizontalPieces.Item1;
 			}
-		}*/
+		}
 		/*for (int col = 0; col < 7; col++)
 		{
 			consecutiveDiagonalPieces = CountConsecutiveDiagonalPieces(col, 1);
@@ -253,7 +255,6 @@ public class GameState
 				return col;
 			}
 		}
-		int column;
 		do
 		{
 			column = random.Next(0, 7);
@@ -283,24 +284,29 @@ public class GameState
 		return 0;
 	}
 
-	/*private (int, string) CountConsecutiveHorizontalPieces(int column, int playerNumber)
+	private (int, int, string) CountConsecutiveHorizontalPieces(int column, int playerNumber)
 	{
 		int consecutiveCount = 0;
 		for (int row = 5; row >= 0; row--)
-		{
+		{	
 			int index = row * 7;
 			for (int col = column; col < 7; col++)
 			{
+				//Con este logro recorrer todas las posiciones
+				/*if(TheBoard[col + index] == 0){
+					return (consecutiveCount, "none");
+				}*/
+				//Hallar la forma de guardar y mandar el valor de la columna desde donde empieza a contar
 				if (TheBoard[col + index] == playerNumber)
 				{
 					consecutiveCount++;
 					if (consecutiveCount >= 2 && TheBoard[col + index + 1] == 0 && (col + index + 8 > 41 || TheBoard[col + index + 8] != 0))
 					{
-						return (consecutiveCount, "right");
+						return (consecutiveCount, (col-consecutiveCount)+1, "right");
 					}
 					if (consecutiveCount >= 2 && TheBoard[col + index - consecutiveCount] == 0 && (col + index + 6 > 41 || TheBoard[col + index + 6] != 0))
 					{
-						return (consecutiveCount, "left");
+						return (consecutiveCount, (col-consecutiveCount)+1, "left");
 					}
 				}
 				else
@@ -309,8 +315,8 @@ public class GameState
 				}
 			}
 		}
-		return (consecutiveCount, "none");
-	}*/
+		return (consecutiveCount, 0, "left");
+	}
 
 	/*private (int, string) CountConsecutiveDiagonalPieces(int column, int playerNumber)
 	{
