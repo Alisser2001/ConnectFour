@@ -146,19 +146,121 @@ public class GameState
 	public int RandomColumn()
 	{
 		int consecutiveVerticalPieces;
+		(int, string) consecutiveHorizontalPieces;
+		(int, string) consecutiveDiagonalPieces;
 		Random random = new Random();
 		for (int col = 0; col < 7; col++)
 		{
-			consecutiveVerticalPieces = CountConsecutiveVerticalPieces(col, 2);
-			if (consecutiveVerticalPieces >= 2 && TheBoard[col] == 0)
+			consecutiveHorizontalPieces = CountConsecutiveHorizontalPieces(col, 1);
+			if (consecutiveHorizontalPieces.Item1 >= 2 && consecutiveHorizontalPieces.Item2 == "left" && col > 0)
+			{
+				if (col - consecutiveHorizontalPieces.Item1 >= 0)
+				{
+					return col - consecutiveHorizontalPieces.Item1;
+				}
+			}
+			if (consecutiveHorizontalPieces.Item1 >= 2 && consecutiveHorizontalPieces.Item2 == "right" && col < 6)
+			{
+				if (col + consecutiveHorizontalPieces.Item1 <= 6)
+				{
+					return col + consecutiveHorizontalPieces.Item1;
+				}
+			}
+		}
+		for (int col = 0; col < 7; col++)
+		{
+			consecutiveHorizontalPieces = CountConsecutiveHorizontalPieces(col, 2);
+			if (consecutiveHorizontalPieces.Item1 >= 2 && consecutiveHorizontalPieces.Item2 == "left" && col > 0)
+			{
+				if (col - consecutiveHorizontalPieces.Item1 < 0)
+				{
+					return col - consecutiveHorizontalPieces.Item1;
+				}
+			}
+			if (consecutiveHorizontalPieces.Item1 >= 2 && consecutiveHorizontalPieces.Item2 == "right" && col < 4)
+			{
+				if (col + consecutiveHorizontalPieces.Item1 > 6)
+				{
+					return col + consecutiveHorizontalPieces.Item1;
+				}
+			}
+		}
+		for (int col = 0; col < 7; col++)
+		{
+			consecutiveDiagonalPieces = CountConsecutiveDiagonalPieces(col, 1);
+			if (consecutiveDiagonalPieces.Item1 >= 2 && consecutiveDiagonalPieces.Item2 == "left-up" && col > 0)
+			{
+				if (col - consecutiveDiagonalPieces.Item1 < 0)
+				{
+					return col - consecutiveDiagonalPieces.Item1;
+				}
+			}
+			if (consecutiveDiagonalPieces.Item1 >= 2 && consecutiveDiagonalPieces.Item2 == "right-up" && col < 6)
+			{
+				if (col + consecutiveDiagonalPieces.Item1 > 6)
+				{
+					return col + consecutiveDiagonalPieces.Item1;
+				}
+			}
+			if (consecutiveDiagonalPieces.Item1 >= 2 && consecutiveDiagonalPieces.Item2 == "left-down" && col > 0)
+			{
+				if (col - consecutiveDiagonalPieces.Item1 < 0)
+				{
+					return col - consecutiveDiagonalPieces.Item1;
+				}
+			}
+			if (consecutiveDiagonalPieces.Item1 >= 2 && consecutiveDiagonalPieces.Item2 == "right-down" && col < 6)
+			{
+				if (col + consecutiveDiagonalPieces.Item1 > 6)
+				{
+					return col + consecutiveDiagonalPieces.Item1;
+				}
+			}
+		}
+		for (int col = 0; col < 7; col++)
+		{
+			consecutiveDiagonalPieces = CountConsecutiveDiagonalPieces(col, 2);
+			if (consecutiveDiagonalPieces.Item1 >= 2 && consecutiveDiagonalPieces.Item2 == "left-up" && col > 0)
+			{
+				if (col - consecutiveDiagonalPieces.Item1 < 0)
+				{
+					return col - consecutiveDiagonalPieces.Item1;
+				}
+			}
+			if (consecutiveDiagonalPieces.Item1 >= 2 && consecutiveDiagonalPieces.Item2 == "right-up" && col < 6)
+			{
+				if (col + consecutiveDiagonalPieces.Item1 > 6)
+				{
+					return col + consecutiveDiagonalPieces.Item1;
+				}
+			}
+			if (consecutiveDiagonalPieces.Item1 >= 2 && consecutiveDiagonalPieces.Item2 == "left-down" && col > 0)
+			{
+				if (col - consecutiveDiagonalPieces.Item1 < 0)
+				{
+					return col - consecutiveDiagonalPieces.Item1;
+				}
+			}
+			if (consecutiveDiagonalPieces.Item1 >= 2 && consecutiveDiagonalPieces.Item2 == "right-down" && col < 6)
+			{
+				if (col + consecutiveDiagonalPieces.Item1 > 6)
+				{
+					return col + consecutiveDiagonalPieces.Item1;
+				}
+			}
+		}
+		for (int col = 0; col < 7; col++)
+		{
+			consecutiveVerticalPieces = CountConsecutiveVerticalPieces(col, 1);
+			if (consecutiveVerticalPieces >= 3 && TheBoard[col] == 0)
 			{
 				return col;
 			}
 		}
 		for (int col = 0; col < 7; col++)
 		{
-			consecutiveVerticalPieces = CountConsecutiveVerticalPieces(col, 1);
-			if (consecutiveVerticalPieces >= 2 && TheBoard[col] == 0)
+			consecutiveVerticalPieces = CountConsecutiveVerticalPieces(col, 2);
+			if (consecutiveVerticalPieces >= 3 && TheBoard[col] == 0)
 			{
 				return col;
 			}
@@ -171,45 +273,155 @@ public class GameState
 		return column;
 	}
 
+	private (int, string) CountConsecutiveHorizontalPieces(int column, int playerNumber)
+	{
+		int consecutiveCount = 0;
+		for (int row = 5; row >= 0; row--)
+		{
+			int index = row * 7;
+			for (int col = column; col < 7; col++)
+			{
+				if (TheBoard[col + index] == playerNumber)
+				{
+					consecutiveCount++;
+					if (consecutiveCount >= 2 && TheBoard[col + index + 1] == 0 && (col + index + 8 > 41 || TheBoard[col + index + 8] != 0))
+					{
+						return (consecutiveCount, "right");
+					}
+					if (consecutiveCount >= 2 && TheBoard[col + index - 4] == 0 && (col + index + 6 > 41 || TheBoard[col + index + 6] != 0))
+					{
+						return (consecutiveCount, "left");
+					}
+				}
+				else
+				{
+					consecutiveCount = 0;
+				}
+			}
+		}
+		return (consecutiveCount, "none");
+	}
+
 	private int CountConsecutiveVerticalPieces(int column, int playerNumber)
 	{
 		int consecutiveCount = 0;
-		for (int row = 0; row < 6; row++)
+		for (int row = 5; row >= 0; row--)
 		{
 			int index = row * 7 + column;
 			if (TheBoard[index] == playerNumber)
 			{
 				consecutiveCount++;
+				if (consecutiveCount >= 2)
+				{
+					return consecutiveCount;
+				}
 			}
 			else
 			{
 				consecutiveCount = 0;
 			}
 		}
-		Console.WriteLine("Col: " + column + " - Count: " + consecutiveCount);
 		if (consecutiveCount >= 2)
 		{
 			return consecutiveCount;
-		} 
+		}
 		else
 		{
 			return 0;
 		}
 	}
 
+	private (int, string) CountConsecutiveDiagonalPieces(int column, int playerNumber)
+	{
+		int consecutiveCount = 0;
+		for (int row = 5; row >= 0; row--)
+		{
+			int index = row * 7;
+			int flag = 0;
+			//Esquina superior izquierda
+			for (int col = 6; col >= column; col--)
+			{
+				if (col != 0 && TheBoard[col] == 0 && TheBoard[col + index - flag] == playerNumber)
+				{
+					consecutiveCount++;
+					if (consecutiveCount >= 2 && col != 0 && TheBoard[col + index - 8] == 0 && TheBoard[col + index - 1] != 0)
+					{
+						return (consecutiveCount, "left-up");
+					}
+				}
+				else
+				{
+					consecutiveCount = 0;
+				}
+				flag += 7;
+			}
+			flag = 0;
+			//Esquina superior derecha
+			for (int col = column; col < 7; col++)
+			{
+				if (col != 6 && TheBoard[col] == 0 && TheBoard[col + index - flag] == playerNumber)
+				{
+					consecutiveCount++;
+					if (consecutiveCount >= 2 && col != 6 && TheBoard[col + index - 6] == 0 && TheBoard[col + index + 1] != 0)
+					{
+						return (consecutiveCount, "right-up");
+					}
+				}
+				else
+				{
+					consecutiveCount = 0;
+				}
+				flag += 7;
+			}
+			flag = 0;
+			//Esquina inferior izquierda
+			for (int col = 6; col >= column; col--)
+			{
+				if (col != 0 && TheBoard[col + index + flag] < 42 && TheBoard[col + index + flag] == playerNumber)
+				{
+					consecutiveCount++;
+					if (consecutiveCount >= 2 && col != 0 && TheBoard[col + index + 7] < 42 && TheBoard[col + index + 6] == 0)
+					{
+						return (consecutiveCount, "left-dowm");
+					}
+				}
+				else
+				{
+					consecutiveCount = 0;
+				}
+				flag += 7;
+			}
+			flag = 0;
+			//Esquina inferior derecha
+			for (int col = column; col < 7; col++)
+			{
+				if (col != 6 && TheBoard[col + index + flag] < 42 && TheBoard[col + index + flag] == playerNumber)
+				{
+					consecutiveCount++;
+					if (consecutiveCount >= 2 && col != 6 && TheBoard[col + index + 7] < 42 && TheBoard[col + index + 8] == 0)
+					{
+						return (consecutiveCount, "right-down");
+					}
+				}
+				else
+				{
+					consecutiveCount = 0;
+				}
+				flag += 7;
+			}
+		}
+		return (consecutiveCount, "none");
+	}
 
 	public List<int> TheBoard { get; private set; } = new List<int>(new int[42]);
-
 
 	public void ResetBoard()
 	{
 		TheBoard = new List<int>(new int[42]);
 	}
 
-
 	private byte ConvertLandingSpotToRow(int landingSpot)
 	{
 		return (byte)(Math.Floor(landingSpot / (decimal)7) + 1);
 	}
-
 }
