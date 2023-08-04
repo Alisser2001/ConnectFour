@@ -146,25 +146,19 @@ public class GameState
 	public int RandomColumn()
 	{
 		int consecutiveVerticalPieces;
-		(int, string) consecutiveHorizontalPieces;
-		(int, string) consecutiveDiagonalPieces;
-		Random random = new Random();
-		for (int col = 0; col < 7; col++)
+		//(int, string) consecutiveHorizontalPieces;
+		//(int, string) consecutiveDiagonalPieces;
+		Random random = new();
+		/*for (int col = 0; col < 7; col++)
 		{
 			consecutiveHorizontalPieces = CountConsecutiveHorizontalPieces(col, 1);
 			if (consecutiveHorizontalPieces.Item1 >= 2 && consecutiveHorizontalPieces.Item2 == "left" && col > 0)
 			{
-				if (col - consecutiveHorizontalPieces.Item1 >= 0)
-				{
-					return col - consecutiveHorizontalPieces.Item1;
-				}
+				return col - 1;
 			}
-			if (consecutiveHorizontalPieces.Item1 >= 2 && consecutiveHorizontalPieces.Item2 == "right" && col < 6)
+			if (consecutiveHorizontalPieces.Item1 >= 2 && consecutiveHorizontalPieces.Item2 == "right" && col < 6 && (col + consecutiveHorizontalPieces.Item1) <= 6)
 			{
-				if (col + consecutiveHorizontalPieces.Item1 <= 6)
-				{
-					return col + consecutiveHorizontalPieces.Item1;
-				}
+				return col + consecutiveHorizontalPieces.Item1;
 			}
 		}
 		for (int col = 0; col < 7; col++)
@@ -172,20 +166,14 @@ public class GameState
 			consecutiveHorizontalPieces = CountConsecutiveHorizontalPieces(col, 2);
 			if (consecutiveHorizontalPieces.Item1 >= 2 && consecutiveHorizontalPieces.Item2 == "left" && col > 0)
 			{
-				if (col - consecutiveHorizontalPieces.Item1 < 0)
-				{
-					return col - consecutiveHorizontalPieces.Item1;
-				}
+				return col - consecutiveHorizontalPieces.Item1;
 			}
-			if (consecutiveHorizontalPieces.Item1 >= 2 && consecutiveHorizontalPieces.Item2 == "right" && col < 4)
+			if (consecutiveHorizontalPieces.Item1 >= 2 && consecutiveHorizontalPieces.Item2 == "right" && col < 4 && (col + consecutiveHorizontalPieces.Item1) <= 6)
 			{
-				if (col + consecutiveHorizontalPieces.Item1 > 6)
-				{
-					return col + consecutiveHorizontalPieces.Item1;
-				}
+				return col + consecutiveHorizontalPieces.Item1;
 			}
-		}
-		for (int col = 0; col < 7; col++)
+		}*/
+		/*for (int col = 0; col < 7; col++)
 		{
 			consecutiveDiagonalPieces = CountConsecutiveDiagonalPieces(col, 1);
 			if (consecutiveDiagonalPieces.Item1 >= 2 && consecutiveDiagonalPieces.Item2 == "left-up" && col > 0)
@@ -248,7 +236,7 @@ public class GameState
 					return col + consecutiveDiagonalPieces.Item1;
 				}
 			}
-		}
+		}*/
 		for (int col = 0; col < 7; col++)
 		{
 			consecutiveVerticalPieces = CountConsecutiveVerticalPieces(col, 1);
@@ -260,7 +248,7 @@ public class GameState
 		for (int col = 0; col < 7; col++)
 		{
 			consecutiveVerticalPieces = CountConsecutiveVerticalPieces(col, 2);
-			if (consecutiveVerticalPieces >= 3 && TheBoard[col] == 0)
+			if (consecutiveVerticalPieces >= 2 && TheBoard[col] == 0)
 			{
 				return col;
 			}
@@ -273,7 +261,29 @@ public class GameState
 		return column;
 	}
 
-	private (int, string) CountConsecutiveHorizontalPieces(int column, int playerNumber)
+	private int CountConsecutiveVerticalPieces(int column, int playerNumber)
+	{
+		int consecutiveCount = 0;
+		for (int row = 5; row >= 0; row--)
+		{
+			int index = row * 7 + column;
+			if (TheBoard[index] == playerNumber)
+			{
+				consecutiveCount++;
+				if (consecutiveCount >= 2 && index - 7 >= 0 && TheBoard[index - 7] == 0)
+				{
+					return consecutiveCount;
+				}
+			}
+			else
+			{
+				consecutiveCount = 0;
+			}
+		}
+		return 0;
+	}
+
+	/*private (int, string) CountConsecutiveHorizontalPieces(int column, int playerNumber)
 	{
 		int consecutiveCount = 0;
 		for (int row = 5; row >= 0; row--)
@@ -288,7 +298,7 @@ public class GameState
 					{
 						return (consecutiveCount, "right");
 					}
-					if (consecutiveCount >= 2 && TheBoard[col + index - 4] == 0 && (col + index + 6 > 41 || TheBoard[col + index + 6] != 0))
+					if (consecutiveCount >= 2 && TheBoard[col + index - consecutiveCount] == 0 && (col + index + 6 > 41 || TheBoard[col + index + 6] != 0))
 					{
 						return (consecutiveCount, "left");
 					}
@@ -300,38 +310,9 @@ public class GameState
 			}
 		}
 		return (consecutiveCount, "none");
-	}
+	}*/
 
-	private int CountConsecutiveVerticalPieces(int column, int playerNumber)
-	{
-		int consecutiveCount = 0;
-		for (int row = 5; row >= 0; row--)
-		{
-			int index = row * 7 + column;
-			if (TheBoard[index] == playerNumber)
-			{
-				consecutiveCount++;
-				if (consecutiveCount >= 2)
-				{
-					return consecutiveCount;
-				}
-			}
-			else
-			{
-				consecutiveCount = 0;
-			}
-		}
-		if (consecutiveCount >= 2)
-		{
-			return consecutiveCount;
-		}
-		else
-		{
-			return 0;
-		}
-	}
-
-	private (int, string) CountConsecutiveDiagonalPieces(int column, int playerNumber)
+	/*private (int, string) CountConsecutiveDiagonalPieces(int column, int playerNumber)
 	{
 		int consecutiveCount = 0;
 		for (int row = 5; row >= 0; row--)
@@ -411,7 +392,7 @@ public class GameState
 			}
 		}
 		return (consecutiveCount, "none");
-	}
+	}*/
 
 	public List<int> TheBoard { get; private set; } = new List<int>(new int[42]);
 
