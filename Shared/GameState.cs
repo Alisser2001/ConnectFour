@@ -147,8 +147,7 @@ public class GameState
 	{
 		int consecutiveVerticalPieces;
 		(int, int, string) consecutiveHorizontalPieces;
-		//(int, string) consecutiveDiagonalPieces;
-		//Arreglar error: EN algun punto cuando pongo dos fichas juntas en las dos ultimas casillas, el juego se tilda
+		(int, int, string) consecutiveDiagonalPieces;
 		int column;
 		Random random = new();
 		for (int col = 0; col < 7; col++)
@@ -175,74 +174,50 @@ public class GameState
 				return consecutiveHorizontalPieces.Item2 + consecutiveHorizontalPieces.Item1;
 			}
 		}
-		/*for (int col = 0; col < 7; col++)
+		for (int col = 0; col < 7; col++)
 		{
 			consecutiveDiagonalPieces = CountConsecutiveDiagonalPieces(col, 1);
-			if (consecutiveDiagonalPieces.Item1 >= 2 && consecutiveDiagonalPieces.Item2 == "left-up" && col > 0)
+			if (consecutiveDiagonalPieces.Item1 >= 2 && consecutiveDiagonalPieces.Item3 == "left-up" && col > 0 && col - consecutiveDiagonalPieces.Item1 >= 0)
 			{
-				if (col - consecutiveDiagonalPieces.Item1 < 0)
-				{
-					return col - consecutiveDiagonalPieces.Item1;
-				}
+				return col - consecutiveDiagonalPieces.Item1;
 			}
-			if (consecutiveDiagonalPieces.Item1 >= 2 && consecutiveDiagonalPieces.Item2 == "right-up" && col < 6)
+			if (consecutiveDiagonalPieces.Item1 >= 2 && consecutiveDiagonalPieces.Item3 == "right-up" && col < 6 && col + consecutiveDiagonalPieces.Item1 <= 6)
 			{
-				if (col + consecutiveDiagonalPieces.Item1 > 6)
-				{
-					return col + consecutiveDiagonalPieces.Item1;
-				}
+				return col + consecutiveDiagonalPieces.Item1;
 			}
-			if (consecutiveDiagonalPieces.Item1 >= 2 && consecutiveDiagonalPieces.Item2 == "left-down" && col > 0)
+			if (consecutiveDiagonalPieces.Item1 >= 2 && consecutiveDiagonalPieces.Item3 == "left-down" && col > 0 && col - consecutiveDiagonalPieces.Item1 >= 0)
 			{
-				if (col - consecutiveDiagonalPieces.Item1 < 0)
-				{
-					return col - consecutiveDiagonalPieces.Item1;
-				}
+				return col - consecutiveDiagonalPieces.Item1;
 			}
-			if (consecutiveDiagonalPieces.Item1 >= 2 && consecutiveDiagonalPieces.Item2 == "right-down" && col < 6)
+			if (consecutiveDiagonalPieces.Item1 >= 2 && consecutiveDiagonalPieces.Item3 == "right-down" && col < 6 && col + consecutiveDiagonalPieces.Item1 <= 6)
 			{
-				if (col + consecutiveDiagonalPieces.Item1 > 6)
-				{
-					return col + consecutiveDiagonalPieces.Item1;
-				}
+				return col + consecutiveDiagonalPieces.Item1;
 			}
 		}
 		for (int col = 0; col < 7; col++)
 		{
 			consecutiveDiagonalPieces = CountConsecutiveDiagonalPieces(col, 2);
-			if (consecutiveDiagonalPieces.Item1 >= 2 && consecutiveDiagonalPieces.Item2 == "left-up" && col > 0)
+			if (consecutiveDiagonalPieces.Item1 >= 2 && consecutiveDiagonalPieces.Item3 == "left-up" && col > 0 && col - consecutiveDiagonalPieces.Item1 < 0)
 			{
-				if (col - consecutiveDiagonalPieces.Item1 < 0)
-				{
-					return col - consecutiveDiagonalPieces.Item1;
-				}
+				return col - consecutiveDiagonalPieces.Item1;
 			}
-			if (consecutiveDiagonalPieces.Item1 >= 2 && consecutiveDiagonalPieces.Item2 == "right-up" && col < 6)
+			if (consecutiveDiagonalPieces.Item1 >= 2 && consecutiveDiagonalPieces.Item3 == "right-up" && col < 6 && col + consecutiveDiagonalPieces.Item1 > 6)
 			{
-				if (col + consecutiveDiagonalPieces.Item1 > 6)
-				{
-					return col + consecutiveDiagonalPieces.Item1;
-				}
+				return col + consecutiveDiagonalPieces.Item1;
 			}
-			if (consecutiveDiagonalPieces.Item1 >= 2 && consecutiveDiagonalPieces.Item2 == "left-down" && col > 0)
+			if (consecutiveDiagonalPieces.Item1 >= 2 && consecutiveDiagonalPieces.Item3 == "left-down" && col > 0 && col - consecutiveDiagonalPieces.Item1 < 0)
 			{
-				if (col - consecutiveDiagonalPieces.Item1 < 0)
-				{
-					return col - consecutiveDiagonalPieces.Item1;
-				}
+				return col - consecutiveDiagonalPieces.Item1;
 			}
-			if (consecutiveDiagonalPieces.Item1 >= 2 && consecutiveDiagonalPieces.Item2 == "right-down" && col < 6)
+			if (consecutiveDiagonalPieces.Item1 >= 2 && consecutiveDiagonalPieces.Item3 == "right-down" && col < 6 && col + consecutiveDiagonalPieces.Item1 > 6)
 			{
-				if (col + consecutiveDiagonalPieces.Item1 > 6)
-				{
-					return col + consecutiveDiagonalPieces.Item1;
-				}
+				return col + consecutiveDiagonalPieces.Item1;
 			}
-		}*/
+		}
 		for (int col = 0; col < 7; col++)
 		{
 			consecutiveVerticalPieces = CountConsecutiveVerticalPieces(col, 1);
-			if (consecutiveVerticalPieces >= 3 && TheBoard[col] == 0)
+			if (consecutiveVerticalPieces >= 2 && TheBoard[col] == 0)
 			{
 				return col;
 			}
@@ -290,7 +265,6 @@ public class GameState
 			return 0;
 		}
 	}
-
 	private (int, int, string) CountConsecutiveHorizontalPieces(int column, int playerNumber)
 	{
 		try
@@ -306,11 +280,11 @@ public class GameState
 						consecutiveCount++;
 						if (consecutiveCount >= 2 && TheBoard[col + index + 1] == 0 && (col + index + 8 > 41 || TheBoard[col + index + 8] != 0))
 						{
-							return (consecutiveCount, (col - consecutiveCount) + 1, "right");
+							return (consecutiveCount, col - consecutiveCount + 1, "right");
 						}
 						if (consecutiveCount >= 2 && TheBoard[col + index - consecutiveCount] == 0 && (col + index + 6 > 41 || TheBoard[col + index + 6] != 0))
 						{
-							return (consecutiveCount, (col - consecutiveCount) + 1, "left");
+							return (consecutiveCount, col - consecutiveCount + 1, "left");
 						}
 					}
 					else
@@ -326,88 +300,106 @@ public class GameState
 			return (0, 0, "left");
 		}
 	}
-
-	/*private (int, string) CountConsecutiveDiagonalPieces(int column, int playerNumber)
+	private (int, int, string) CountConsecutiveDiagonalPieces(int column, int playerNumber)
 	{
-		int consecutiveCount = 0;
-		for (int row = 5; row >= 0; row--)
+		try
 		{
-			int index = row * 7;
-			int flag = 0;
-			//Esquina superior izquierda
-			for (int col = 6; col >= column; col--)
+			int consecutiveCount = 0;
+			for (int row = 5; row >= 0; row--)
 			{
-				if (col != 0 && TheBoard[col] == 0 && TheBoard[col + index - flag] == playerNumber)
+				int index = row * 7;
+				int flag = 0;
+				//Esquina superior izquierda
+				for (int col = 6; col >= column; col--)
 				{
-					consecutiveCount++;
-					if (consecutiveCount >= 2 && col != 0 && TheBoard[col + index - 8] == 0 && TheBoard[col + index - 1] != 0)
+					if (col != 0 && col + index - flag > 0 && TheBoard[col] == 0 && TheBoard[col + index - flag] == playerNumber)
 					{
-						return (consecutiveCount, "left-up");
+						consecutiveCount++;
+						if (consecutiveCount >= 2 && col != 0 && col + index - flag - 8 >= 0 && TheBoard[col + index - flag - 8] == 0 && TheBoard[col + index - flag - 1] != 0)
+						{
+							return (consecutiveCount, col + consecutiveCount - 1, "left-up");
+						}
 					}
+					else
+					{
+						consecutiveCount = 0;
+					}
+					flag += 7;
 				}
-				else
-				{
-					consecutiveCount = 0;
-				}
-				flag += 7;
 			}
-			flag = 0;
 			//Esquina superior derecha
-			for (int col = column; col < 7; col++)
+			for (int row = 5; row >= 0; row--)
 			{
-				if (col != 6 && TheBoard[col] == 0 && TheBoard[col + index - flag] == playerNumber)
+				int index = row * 7;
+				int flag = 0;
+				for (int col = column; col < 7; col++)
 				{
-					consecutiveCount++;
-					if (consecutiveCount >= 2 && col != 6 && TheBoard[col + index - 6] == 0 && TheBoard[col + index + 1] != 0)
+					if (col != 6 && col + index - flag > 0 && TheBoard[col] == 0 && TheBoard[col + index - flag] == playerNumber)
 					{
-						return (consecutiveCount, "right-up");
+						consecutiveCount++;
+						if (consecutiveCount >= 2 && col != 6 && col + index - flag - 6 >= 0 && TheBoard[col + index - flag - 6] == 0 && TheBoard[col + index - flag + 1] != 0)
+						{
+							return (consecutiveCount, col - consecutiveCount + 1, "right-up");
+						}
 					}
+					else
+					{
+						consecutiveCount = 0;
+					}
+					flag += 7;
 				}
-				else
-				{
-					consecutiveCount = 0;
-				}
-				flag += 7;
 			}
-			flag = 0;
 			//Esquina inferior izquierda
-			for (int col = 6; col >= column; col--)
+			for (int row = 0; row < 6; row++)
 			{
-				if (col != 0 && TheBoard[col + index + flag] < 42 && TheBoard[col + index + flag] == playerNumber)
+				int index = row * 7;
+				int flag = 0;
+				for (int col = 6; col >= column; col--)
 				{
-					consecutiveCount++;
-					if (consecutiveCount >= 2 && col != 0 && TheBoard[col + index + 7] < 42 && TheBoard[col + index + 6] == 0)
+					if (col != 0 && col + index + flag > 0 && col + index + flag < 42 && TheBoard[col + index + flag] == playerNumber)
 					{
-						return (consecutiveCount, "left-dowm");
+						consecutiveCount++;
+						if (consecutiveCount >= 2 && col != 0 && col + index + flag + 7 < 42 && TheBoard[col + index + flag + 6] == 0)
+						{
+							return (consecutiveCount, col + consecutiveCount - 1, "left-dowm");
+						}
 					}
+					else
+					{
+						consecutiveCount = 0;
+					}
+					flag += 7;
 				}
-				else
-				{
-					consecutiveCount = 0;
-				}
-				flag += 7;
 			}
-			flag = 0;
 			//Esquina inferior derecha
-			for (int col = column; col < 7; col++)
+			for (int row = 0; row < 6; row++)
 			{
-				if (col != 6 && TheBoard[col + index + flag] < 42 && TheBoard[col + index + flag] == playerNumber)
+				int index = row * 7;
+				int flag = 0;
+				for (int col = column; col < 7; col++)
 				{
-					consecutiveCount++;
-					if (consecutiveCount >= 2 && col != 6 && TheBoard[col + index + 7] < 42 && TheBoard[col + index + 8] == 0)
+					if (col != 6 && col + index + flag < 42 && TheBoard[col + index + flag] == playerNumber)
 					{
-						return (consecutiveCount, "right-down");
+						consecutiveCount++;
+						if (consecutiveCount >= 2 && col != 6 && col + index + flag + 7 < 42 && TheBoard[col + index + flag + 8] == 0)
+						{
+							return (consecutiveCount, col - consecutiveCount + 1, "right-down");
+						}
 					}
+					else
+					{
+						consecutiveCount = 0;
+					}
+					flag += 7;
 				}
-				else
-				{
-					consecutiveCount = 0;
-				}
-				flag += 7;
 			}
+			return (consecutiveCount, 0, "none");
 		}
-		return (consecutiveCount, "none");
-	}*/
+		catch
+		{
+			return (0, 0, "none");
+		}
+	}
 
 	public List<int> TheBoard { get; private set; } = new List<int>(new int[42]);
 
