@@ -14,6 +14,11 @@
 </HeadContent>
 
 <div class="container">
+  <article class="score">
+    <span>Player 1: @PP1</span>
+    <span>@PlayerTwo: @PP2</span>
+  </article>
+
   <article class="alert">
     <span class="alert-info">@CurrentTurn</span>
     <span>@WinnerMessage</span>
@@ -59,6 +64,9 @@
   private string WinnerMessage = string.Empty;
   private string ErrorMessage = string.Empty;
   private string[] OnFocusCol = new string[7];
+  private string PlayerTwo = string.Empty;
+  private int PP1 = 0;
+  private int PP2 = 0;
   private string CurrentTurn => (WinnerMessage == string.Empty) ? $"Player {State.PlayerTurn}'s Turn" : "";
   private string ResetStyle => (WinnerMessage == string.Empty) ? "display: none;" : "";
   private string PlayAgainstMachineStyle => (WinnerMessage == string.Empty && !State.TwoPlayers) ? "" : "display: none;";
@@ -88,6 +96,12 @@
         GameState.WinState.Tie => "It's a tie!",
         _ => ""
       };
+      if(WinnerMessage == "Player 1 Wins!"){
+        PP1 += 1;
+      }
+      if(WinnerMessage == "Player 2 Wins!"){
+        PP2 += 1;
+      }
       if (WinnerMessage == string.Empty && !State.TwoPlayers && State.PlayerTurn == 2)
       {
         await Task.Delay(500);
@@ -166,5 +180,6 @@
   protected override void OnInitialized()
   {
     State.ResetBoard();
+    PlayerTwo = State.TwoPlayers ? "Player 2" : "CPU";
   }
 }

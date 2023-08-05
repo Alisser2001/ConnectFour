@@ -26,6 +26,10 @@
     cursor: pointer;
 }
 
+.logo:hover[b-6iaftcaddt]{
+    transform: scale(1.05);
+}
+
 .logo>img[b-6iaftcaddt]{
     display: flex;
 }

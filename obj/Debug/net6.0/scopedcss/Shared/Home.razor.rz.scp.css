@@ -26,3 +26,7 @@
 .options>a[b-m9yl5wzv01]{
     margin: 0 0 5vh 0;
 }
+
+.options>a:hover[b-m9yl5wzv01]{
+    transform: scale(1.1);
+}

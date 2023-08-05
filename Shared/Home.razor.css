@@ -26,3 +26,7 @@
 .options>a{
     margin: 0 0 5vh 0;
 }
+
+.options>a:hover{
+    transform: scale(1.1);
+}

@@ -26,6 +26,10 @@
     cursor: pointer;
 }
 
+.logo:hover{
+    transform: scale(1.05);
+}
+
 .logo>img{
     display: flex;
 }
