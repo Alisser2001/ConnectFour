@@ -264,49 +264,18 @@ public class GameState
 
 	private int CountConsecutiveVerticalPieces(int column, int playerNumber)
 	{
-		int consecutiveCount = 0;
-		for (int row = 5; row >= 0; row--)
+		try
 		{
-			int index = row * 7 + column;
-			if (TheBoard[index] == playerNumber)
+			int consecutiveCount = 0;
+			for (int row = 5; row >= 0; row--)
 			{
-				consecutiveCount++;
-				if (consecutiveCount >= 2 && index - 7 >= 0 && TheBoard[index - 7] == 0)
-				{
-					return consecutiveCount;
-				}
-			}
-			else
-			{
-				consecutiveCount = 0;
-			}
-		}
-		return 0;
-	}
-
-	private (int, int, string) CountConsecutiveHorizontalPieces(int column, int playerNumber)
-	{
-		int consecutiveCount = 0;
-		for (int row = 5; row >= 0; row--)
-		{	
-			int index = row * 7;
-			for (int col = column; col < 7; col++)
-			{
-				//Con este logro recorrer todas las posiciones
-				/*if(TheBoard[col + index] == 0){
-					return (consecutiveCount, "none");
-				}*/
-				//Hallar la forma de guardar y mandar el valor de la columna desde donde empieza a contar
-				if (TheBoard[col + index] == playerNumber)
+				int index = row * 7 + column;
+				if (TheBoard[index] == playerNumber)
 				{
 					consecutiveCount++;
-					if (consecutiveCount >= 2 && TheBoard[col + index + 1] == 0 && (col + index + 8 > 41 || TheBoard[col + index + 8] != 0))
+					if (consecutiveCount >= 2 && index - 7 >= 0 && TheBoard[index - 7] == 0)
 					{
-						return (consecutiveCount, (col-consecutiveCount)+1, "right");
-					}
-					if (consecutiveCount >= 2 && TheBoard[col + index - consecutiveCount] == 0 && (col + index + 6 > 41 || TheBoard[col + index + 6] != 0))
-					{
-						return (consecutiveCount, (col-consecutiveCount)+1, "left");
+						return consecutiveCount;
 					}
 				}
 				else
@@ -314,8 +283,48 @@ public class GameState
 					consecutiveCount = 0;
 				}
 			}
+			return 0;
 		}
-		return (consecutiveCount, 0, "left");
+		catch
+		{
+			return 0;
+		}
+	}
+
+	private (int, int, string) CountConsecutiveHorizontalPieces(int column, int playerNumber)
+	{
+		try
+		{
+			int consecutiveCount = 0;
+			for (int row = 5; row >= 0; row--)
+			{
+				int index = row * 7;
+				for (int col = column; col < 7; col++)
+				{
+					if (TheBoard[col + index] == playerNumber)
+					{
+						consecutiveCount++;
+						if (consecutiveCount >= 2 && TheBoard[col + index + 1] == 0 && (col + index + 8 > 41 || TheBoard[col + index + 8] != 0))
+						{
+							return (consecutiveCount, (col - consecutiveCount) + 1, "right");
+						}
+						if (consecutiveCount >= 2 && TheBoard[col + index - consecutiveCount] == 0 && (col + index + 6 > 41 || TheBoard[col + index + 6] != 0))
+						{
+							return (consecutiveCount, (col - consecutiveCount) + 1, "left");
+						}
+					}
+					else
+					{
+						consecutiveCount = 0;
+					}
+				}
+			}
+			return (consecutiveCount, 0, "left");
+		}
+		catch
+		{
+			return (0, 0, "left");
+		}
 	}
 
 	/*private (int, string) CountConsecutiveDiagonalPieces(int column, int playerNumber)
