@@ -9,6 +9,10 @@
       "PackagePath": "staticwebassets\\Connect4Logo.png"
     },
     {
+      "Id": "C:\\Users\\Alisser\\Documents\\Proyectos\\ConnectFour\\wwwroot\\Logo.png",
+      "PackagePath": "staticwebassets\\Logo.png"
+    },
+    {
       "Id": "C:\\Users\\Alisser\\Documents\\Proyectos\\ConnectFour\\wwwroot\\css\\bootstrap\\bootstrap.min.css",
       "PackagePath": "staticwebassets\\css\\bootstrap\\bootstrap.min.css"
     },

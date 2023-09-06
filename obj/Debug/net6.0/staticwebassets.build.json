@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "iRo7TDdZ0erhZSq5VhtSRGor/zg8ButK6SsSL7dF+yI=",
+  "Hash": "lfcmQWZpv2DflbJ9w2zXHnDTzSKJD1eErjkvVOKLhHk=",
   "Source": "ConnectFour",
   "BasePath": "_content/ConnectFour",
   "Mode": "Default",
@@ -287,6 +287,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\home.png"
+    },
+    {
+      "Identity": "C:\\Users\\Alisser\\Documents\\Proyectos\\ConnectFour\\wwwroot\\Logo.png",
+      "SourceId": "ConnectFour",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Alisser\\Documents\\Proyectos\\ConnectFour\\wwwroot\\",
+      "BasePath": "_content/ConnectFour",
+      "RelativePath": "Logo.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Logo.png"
     },
     {
       "Identity": "C:\\Users\\Alisser\\Documents\\Proyectos\\ConnectFour\\wwwroot\\play.png",
